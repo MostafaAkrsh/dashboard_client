@@ -5,6 +5,9 @@
 #include "inc/com.h"
 #include "QString"
 
+
+// Send
+
 extern Com_Type Com;
 //extern Ui::MainWindowClass* ui_extern;
 

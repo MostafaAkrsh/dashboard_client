@@ -361,8 +361,10 @@ uint8 Com_SendSignal(Com_SignalIdType SignalId,const void* SignalDataPtr)
                         /*Set update bit*/
                         ComIPduLocal->ComBufferRef[ComSignalLocal->ComUpdateBitPosition / 8] |= 1 << (ComSignalLocal->ComUpdateBitPosition%8);
                         ComTeamConfig.ComTeamSignal[ComSignalLocal->ComHandleId].ComTeamSignalUpdated = true;
+                        QByteArray send_packet;
 
-                        QByteArray send_packet((char*)ComIPduLocal->ComBufferRef, ComIPduLocal->ComIPduLength);
+                        send_packet.insert(0, *(unsigned char*)ComIPduLocal->ComBufferRef);
+                        //QByteArray send_packet(ComIPduLocal->ComIPduLength/2 ,*(unsigned char*)ComIPduLocal->ComBufferRef);
                         socket_extern->write(send_packet);
                     }
                     else
