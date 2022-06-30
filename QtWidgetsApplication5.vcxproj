@@ -70,6 +70,9 @@
     <Link>
       <AdditionalDependencies>cudart.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -101,6 +104,8 @@
     <QtRcc Include="MainWindow.qrc" />
     <QtUic Include="MainWindow.ui" />
     <QtMoc Include="MainWindow.h" />
+    <ClCompile Include="Com.cpp" />
+    <ClCompile Include="Gen\Com_Cfg.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -111,6 +116,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cudacode.cuh" />
+    <ClInclude Include="Gen\Com_Cfg.h" />
+    <ClInclude Include="inc\Com.h" />
+    <ClInclude Include="inc\ComStack_Cfg.h" />
+    <ClInclude Include="inc\ComStack_Types.h" />
+    <ClInclude Include="inc\ComTeam_Types.h" />
+    <ClInclude Include="inc\Com_Cbk.h" />
+    <ClInclude Include="inc\Com_Types.h" />
+    <ClInclude Include="Platform_Types.h" />
+    <ClInclude Include="Std_Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

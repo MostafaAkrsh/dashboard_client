@@ -2,12 +2,18 @@
 #include "QHostAddress"
 #include "qlabel.h"
 #include "cudacode.cuh"
+#include "inc/Com.h"
+
+QTcpSocket* socket_extern;
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
     _socket.connectToHost(QHostAddress("127.0.0.1"), 4242);
+    socket_extern = &_socket;
+
     connect(&_socket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
     ui.larrow_b->setVisible(0);
     ui.rarrow_b->setVisible(0);
@@ -28,7 +34,7 @@ void MainWindow::onReadyRead()
 {
     QByteArray datas = _socket.readAll();
     ui.statusbar->showMessage(datas);
-    _socket.write(QByteArray("ok !\n"));
+    socket_extern->write(QByteArray("ok !\n"));
 }
 
 void MainWindow::on_larrow_c_stateChanged(int arg1)
@@ -54,7 +60,11 @@ void MainWindow::on_fuel_c_stateChanged(int arg1)
 {
     ui.fuel_b->setVisible(arg1);
     QByteArray br = 'u' + QString::number(arg1).toUtf8();
-    _socket.write(br);
+    uint8 data = 65;
+    Com_SendSignal(0, &data);
+
+    
+    //_socket.write(br);
     QByteArray datas = _socket.readAll();
 }
 

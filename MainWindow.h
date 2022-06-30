@@ -39,7 +39,7 @@ private slots:
 public slots:
     void onReadyRead();
 
-private:
+public:
     Ui::MainWindowClass ui;
     QTcpSocket  _socket;
 
