@@ -60,7 +60,7 @@ void MainWindow::on_fuel_c_stateChanged(int arg1)
 {
     ui.fuel_b->setVisible(arg1);
     QByteArray br = 'u' + QString::number(arg1).toUtf8();
-    uint8 data = 1;
+    uint8 data = (arg1 == 2);
     Com_SendSignal(0, &data);
 
     
