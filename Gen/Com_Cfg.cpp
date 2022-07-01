@@ -101,13 +101,13 @@ Com_Type Com =
                 },
                .ComIPduSignalRef =
                 {
-                    &Com.ComConfig.ComSignal[0],
-                    &Com.ComConfig.ComSignal[1],
-                    &Com.ComConfig.ComSignal[2],
-                    &Com.ComConfig.ComSignal[3],
-                    &Com.ComConfig.ComSignal[4],
-                    &Com.ComConfig.ComSignal[5],
-                    &Com.ComConfig.ComSignal[6],
+                    &Com.ComConfig.ComSignal[0], //fuel
+                    &Com.ComConfig.ComSignal[1], //opendoor
+                    &Com.ComConfig.ComSignal[2], //light
+                    &Com.ComConfig.ComSignal[3], //battery
+                    &Com.ComConfig.ComSignal[4], //fix
+                    &Com.ComConfig.ComSignal[5], //left
+                    &Com.ComConfig.ComSignal[6], //right
                     NULL
                 },
                 .ComTxIPdu =
@@ -267,7 +267,7 @@ Com_Type Com =
             {
              .ComBitPosition = 0,
              .ComBitSize = 8,
-             .ComHandleId = 8,
+             .ComHandleId = 7,
              .ComNotification = &Com_CbkSignal7TxAck,
              .ComSignalEndianness = LITTLE_ENDIAN,
              .ComSignalLength = 1,
@@ -281,7 +281,7 @@ Com_Type Com =
 
              .ComBitPosition = 8,
              .ComBitSize = 4,
-             .ComHandleId = 9,
+             .ComHandleId = 8,
              .ComNotification = &Com_CbkSignal8TxAck,
              .ComSignalEndianness = LITTLE_ENDIAN,
              .ComSignalLength = 1,

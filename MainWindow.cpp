@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui.setupUi(this);
     _socket.connectToHost(QHostAddress("127.0.0.1"), 4242);
+    //_socket.connectToHost(QHostAddress("192.168.1.1"), 4242);
     socket_extern = &_socket;
 
     connect(&_socket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
@@ -40,8 +41,12 @@ void MainWindow::onReadyRead()
 void MainWindow::on_larrow_c_stateChanged(int arg1)
 {
     ui.larrow_b->setVisible(arg1);
-    QByteArray br = 'e' + QString::number(arg1).toUtf8();
-    _socket.write(br);
+    //QByteArray br = 'e' + QString::number(arg1).toUtf8();
+    
+    uint8 data = (arg1 == 2);
+    Com_SendSignal(5, &data);
+    
+    //_socket.write(br);
     QByteArray datas = _socket.readAll();
 
 }
@@ -50,8 +55,12 @@ void MainWindow::on_larrow_c_stateChanged(int arg1)
 void MainWindow::on_rarrow_c_stateChanged(int arg1)
 {
     ui.rarrow_b->setVisible(arg1);
-    QByteArray br = 'r' + QString::number(arg1).toUtf8();
-    _socket.write(br);
+    //QByteArray br = 'r' + QString::number(arg1).toUtf8();
+
+    uint8 data = (arg1 == 2);
+    Com_SendSignal(6, &data);
+
+    //_socket.write(br);
     QByteArray datas = _socket.readAll();
 }
 
@@ -59,7 +68,8 @@ void MainWindow::on_rarrow_c_stateChanged(int arg1)
 void MainWindow::on_fuel_c_stateChanged(int arg1)
 {
     ui.fuel_b->setVisible(arg1);
-    QByteArray br = 'u' + QString::number(arg1).toUtf8();
+    //QByteArray br = 'u' + QString::number(arg1).toUtf8();
+
     uint8 data = (arg1 == 2);
     Com_SendSignal(0, &data);
 
@@ -72,8 +82,12 @@ void MainWindow::on_fuel_c_stateChanged(int arg1)
 void MainWindow::on_opendoor_c_stateChanged(int arg1)
 {
     ui.opendoor_b->setVisible(arg1);
-    QByteArray br = 'p' + QString::number(arg1).toUtf8();
-    _socket.write(br);
+    //QByteArray br = 'p' + QString::number(arg1).toUtf8();
+    
+    uint8 data = (arg1 == 2);
+    Com_SendSignal(1, &data);
+    
+    //_socket.write(br);
     QByteArray datas = _socket.readAll();
 }
 
@@ -81,8 +95,12 @@ void MainWindow::on_opendoor_c_stateChanged(int arg1)
 void MainWindow::on_light_c_stateChanged(int arg1)
 {
     ui.light_b->setVisible(arg1);
-    QByteArray br = 'l' + QString::number(arg1).toUtf8();
-    _socket.write(br);
+    //QByteArray br = 'l' + QString::number(arg1).toUtf8();
+    
+    uint8 data = (arg1 == 2);
+    Com_SendSignal(2, &data);
+
+    //_socket.write(br);
     QByteArray datas = _socket.readAll();
 }
 
@@ -90,8 +108,12 @@ void MainWindow::on_light_c_stateChanged(int arg1)
 void MainWindow::on_battery_c_stateChanged(int arg1)
 {
     ui.battery_b->setVisible(arg1);
-    QByteArray br = 'b' + QString::number(arg1).toUtf8();
-    _socket.write(br);
+    //QByteArray br = 'b' + QString::number(arg1).toUtf8();
+    
+    uint8 data = (arg1 == 2);
+    Com_SendSignal(3, &data);
+    
+    //_socket.write(br);
     QByteArray datas = _socket.readAll();
 }
 
@@ -99,8 +121,12 @@ void MainWindow::on_battery_c_stateChanged(int arg1)
 void MainWindow::on_fix_c_stateChanged(int arg1)
 {
     ui.fix_b->setVisible(arg1);
-    QByteArray br = 'f' + QString::number(arg1).toUtf8();
-    _socket.write(br);
+    //QByteArray br = 'f' + QString::number(arg1).toUtf8();
+    
+    uint8 data = (arg1 == 2);
+    Com_SendSignal(4, &data);
+    
+    //_socket.write(br);
     QByteArray datas = _socket.readAll();
 }
 
@@ -122,8 +148,11 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
     QString s = QString::number(value);
     ui.speed->setText(s);
-    QByteArray br = 's' + s.toUtf8();
-    _socket.write(br);
+    //QByteArray br = 's' + s.toUtf8();
+    //_socket.write(br);
+
+    Com_SendSignal(7, &value);
+
     QByteArray datas = _socket.readAll();
 
 }
@@ -133,8 +162,11 @@ void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
     QString s = QString::number(value);
     ui.degree->setText(s);
-    QByteArray br = 'd' + s.toUtf8();
-    _socket.write(br);
+    //QByteArray br = 'd' + s.toUtf8();
+    //_socket.write(br);
+
+    Com_SendSignal(8, &value);
+
     QByteArray datas = _socket.readAll();
 }
 

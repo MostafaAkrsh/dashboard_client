@@ -364,7 +364,10 @@ uint8 Com_SendSignal(Com_SignalIdType SignalId,const void* SignalDataPtr)
                         QByteArray send_packet;
 
                         send_packet.insert(0, *(unsigned char*)ComIPduLocal->ComBufferRef);
+                        //send_packet.insert(1, *((unsigned char*)ComIPduLocal->ComBufferRef)+1);
+                        
                         //QByteArray send_packet(ComIPduLocal->ComIPduLength/2 ,*(unsigned char*)ComIPduLocal->ComBufferRef);
+                        send_packet = QByteArray::number(ComIPduLocal->ComIPduHandleId) + send_packet;
                         socket_extern->write(send_packet);
                     }
                     else
@@ -496,7 +499,7 @@ uint8 Com_CheckUpdatedbit(Com_SignalIdType SignalId)
                 ComSignalLocal = Com.ComConfig.ComIPdu[ComIPduIndex].ComIPduSignalRef[ComSignalIndex];
 
                 /* Check the updated bit */
-                if (ComIPduLocal->ComBufferRef[ComSignalLocal->ComUpdateBitPosition] == 1)
+                if ((ComIPduLocal->ComBufferRef[ComSignalLocal->ComUpdateBitPosition]) == 1)
                 {
                     return 1;
                 }
